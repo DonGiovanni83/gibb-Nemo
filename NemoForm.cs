@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Nemo
 {
-    public partial class Form1 : Form
+    public partial class NemoForm : Form
     {
-        public Form1()
+        public NemoForm()
         {
             InitializeComponent();
         }
