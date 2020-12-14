@@ -17,5 +17,17 @@ namespace Nemo
             InitializeComponent();
         }
 
+        public Button getStartButton()
+        {
+            return this.btnStart;
+        }
+        public Button getStopButton()
+        {
+            return this.btnStop;
+        }
+        public Button getRestartButton()
+        {
+            return this.btnRestart;
+        }
     }
 }

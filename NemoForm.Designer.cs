@@ -35,6 +35,9 @@
             this.lblVelocity = new System.Windows.Forms.Label();
             this.lblMaxVelocity = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnRestart = new System.Windows.Forms.Button();
             this.InfoPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,11 +104,42 @@
             this.progressBar1.TabIndex = 0;
             this.progressBar1.Value = 50;
             // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(642, 236);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(131, 35);
+            this.btnStart.TabIndex = 7;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            
+            // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(642, 288);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(131, 35);
+            this.btnStop.TabIndex = 7;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            // 
+            // btnRestart
+            // 
+            this.btnRestart.Location = new System.Drawing.Point(642, 341);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(131, 35);
+            this.btnRestart.TabIndex = 7;
+            this.btnRestart.Text = "Neu starten";
+            this.btnRestart.UseVisualStyleBackColor = true;
+            // 
             // NemoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 657);
+            this.Controls.Add(this.btnRestart);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.lblMaxVelocity);
             this.Controls.Add(this.lblVelocity);
@@ -130,6 +164,9 @@
         private System.Windows.Forms.Label lblVelocity;
         private System.Windows.Forms.Label lblMaxVelocity;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnRestart;
     }
 }
 
