@@ -17,17 +17,62 @@ namespace Nemo
             InitializeComponent();
         }
 
-        public Button getStartButton()
+        public Button GetStartButton()
         {
             return this.btnStart;
         }
-        public Button getStopButton()
+        public Button GetStopButton()
         {
             return this.btnStop;
         }
-        public Button getRestartButton()
+        public Button GetRestartButton()
         {
             return this.btnRestart;
+        }
+
+        public void SetInfoText(String Text)
+        {
+            this.txtInfo.Text = Text;
+        }
+
+        public void DisableStartButton()
+        {
+            this.btnStart.Enabled = false;
+        }
+
+        public void EnableStartButton()
+        {
+            this.btnStart.Enabled = true;
+        }
+
+        public void DisableStopButton()
+        {
+            this.btnStop.Enabled = false;
+        }
+        public void EnableStopButton()
+        {
+            this.btnStop.Enabled = true;
+        }
+        public void DisableRestartButton()
+        {
+            this.btnRestart.Enabled = false;
+        }
+        public void EnableRestartButton()
+        {
+            this.btnRestart.Enabled = true;
+        }
+        public void AddStartButtonClickHandler(EventHandler Handler)
+        {
+            this.btnStart.Click += Handler;
+        }
+        public void AddStopButtonClickHandler(EventHandler Handler)
+        {
+            this.btnStop.Click += Handler;
+        }
+
+        public void AddRestartButtonClickHandler(EventHandler Handler)
+        {
+            this.btnRestart.Click += Handler;
         }
     }
 }

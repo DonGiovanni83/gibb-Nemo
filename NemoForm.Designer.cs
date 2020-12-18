@@ -120,6 +120,7 @@
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(131, 35);
             this.btnStop.TabIndex = 7;
+            this.btnStop.Enabled = false;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
             // 
@@ -130,6 +131,7 @@
             this.btnRestart.Size = new System.Drawing.Size(131, 35);
             this.btnRestart.TabIndex = 7;
             this.btnRestart.Text = "Neu starten";
+            this.btnRestart.Enabled = false;
             this.btnRestart.UseVisualStyleBackColor = true;
             // 
             // NemoForm
@@ -152,7 +154,7 @@
             this.InfoPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
+                
         }
 
         #endregion

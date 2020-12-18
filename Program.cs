@@ -14,13 +14,14 @@ namespace Nemo
         [STAThread]
         static void Main()
         {
-            NemoForm form = new NemoForm();
-            NemoModel model = new NemoModel();
-            NemoController controller = new NemoController(model, view);
+
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            NemoForm form = new NemoForm();
+            NemoModel model = new NemoModel();
+            NemoController controller = new NemoController(model, form);
             Application.Run(form);
         }
     }
