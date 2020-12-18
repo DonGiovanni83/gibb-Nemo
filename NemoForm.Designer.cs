@@ -43,15 +43,15 @@
             // 
             // txtInfo
             // 
-            this.txtInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtInfo.AutoSize = true;
+            this.txtInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtInfo.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.txtInfo.Location = new System.Drawing.Point(347, 42);
+            this.txtInfo.Location = new System.Drawing.Point(0, 0);
             this.txtInfo.Name = "txtInfo";
-            this.txtInfo.Size = new System.Drawing.Size(77, 21);
+            this.txtInfo.Size = new System.Drawing.Size(776, 100);
             this.txtInfo.TabIndex = 0;
             this.txtInfo.Text = "Info Text";
+            this.txtInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InfoPanel
             // 
@@ -112,26 +112,25 @@
             this.btnStart.TabIndex = 7;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
-            
             // 
             // btnStop
             // 
+            this.btnStop.Enabled = false;
             this.btnStop.Location = new System.Drawing.Point(642, 288);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(131, 35);
             this.btnStop.TabIndex = 7;
-            this.btnStop.Enabled = false;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
             // 
             // btnRestart
             // 
+            this.btnRestart.Enabled = false;
             this.btnRestart.Location = new System.Drawing.Point(642, 341);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Size = new System.Drawing.Size(131, 35);
             this.btnRestart.TabIndex = 7;
             this.btnRestart.Text = "Neu starten";
-            this.btnRestart.Enabled = false;
             this.btnRestart.UseVisualStyleBackColor = true;
             // 
             // NemoForm
@@ -151,10 +150,9 @@
             this.Name = "NemoForm";
             this.Text = "Nemo";
             this.InfoPanel.ResumeLayout(false);
-            this.InfoPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-                
+
         }
 
         #endregion
