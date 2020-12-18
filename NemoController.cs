@@ -26,12 +26,14 @@ namespace Nemo
         }
 
         private void ClickOnStart(object sender, EventArgs e) {
+            this.View.StartGameTimer();
             this.View.DisableStartButton();
             this.View.EnableStopButton();
             this.Model.IncreaseGameCount();
             this.View.SetInfoText(this.Model.GetInfoRunning());
         }
         private void ClickOnStopt(object sender, EventArgs e) {
+            this.View.StopGameTimer();
             this.View.DisableStopButton();
             this.View.EnableRestartButton();
             this.View.SetInfoText(this.Model.GetInfoErrorStopped());

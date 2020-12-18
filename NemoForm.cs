@@ -17,6 +17,16 @@ namespace Nemo
             InitializeComponent();
         }
 
+        public void StartGameTimer()
+        {
+            this.timerGame.Start();
+        }
+
+        public void StopGameTimer()
+        {
+            this.timerGame.Stop();
+        }
+
         public Button GetStartButton()
         {
             return this.btnStart;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtInfo = new System.Windows.Forms.Label();
             this.InfoPanel = new System.Windows.Forms.Panel();
             this.panelSpiel = new System.Windows.Forms.Panel();
@@ -38,6 +39,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
+            this.timerGame = new System.Windows.Forms.Timer(this.components);
             this.InfoPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,6 +169,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnRestart;
+        private System.Windows.Forms.Timer timerGame;
     }
 }
 
