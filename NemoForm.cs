@@ -13,11 +13,11 @@ namespace Nemo
     public partial class NemoForm : Form
     {
 
-        private List<Label> VisibleSquares;
+        private Queue<Label> VisibleSquares;
         public NemoForm()
         {
             InitializeComponent();
-            this.VisibleSquares = new List<Label>();
+            this.VisibleSquares = new Queue<Label>();
         }
 
         public void RenderTile(Panel tile)
@@ -30,13 +30,58 @@ namespace Nemo
             this.panelSpiel.Controls.Clear();
         }
 
-        public void MoveTiles(int speed)
+        public void MoveTiles(int speed, int currentRowIndex)
         {
             foreach (Control tile in this.panelSpiel.Controls)
             {
-                tile.Location = new Point(tile.Location.X, tile.Location.Y + speed);
+                this.MoveSingleTile(tile, speed);
+            }
+            this.RenderNewTileIfNecessary(currentRowIndex);
+        }
+
+        private void MoveSingleTile(Control tile, int speed)
+        {
+            // Move tile
+            tile.Location = new Point(tile.Location.X, tile.Location.Y + speed);
+
+            // If out of Panel remove it
+            if (!this.TileIsInVisibleRange(tile))
+            {
+                this.panelSpiel.Controls.Remove(tile);
             }
         }
+
+        private bool TileIsInVisibleRange(Control tile)
+        {
+            return this.panelSpiel.Height > tile.Location.Y;
+        }
+
+        private void RenderNewTileIfNecessary(int rowIndex)
+        {
+            if (this.NewTileRowRequired())
+            {
+                Tile newTile = new Tile(rowIndex, new Point(0, -92));
+                this.panelSpiel.Controls.Add(newTile.GetView());
+            }
+        }
+
+        private bool NewTileRowRequired()
+        {
+            // First find the y value of the tile row on top
+            int currentMinY = 0;
+            foreach(Control tile in this.panelSpiel.Controls)
+            {
+                if (currentMinY > tile.Location.Y)
+                {
+                    currentMinY = tile.Location.Y;
+                }
+            }
+
+            // A new tile is required if the current minimal Y is >= 0
+            return currentMinY >= 0;
+        }
+
+
         public void StartGameTimer()
         {
             this.timerGame.Start();

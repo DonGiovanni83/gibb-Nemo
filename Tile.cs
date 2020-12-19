@@ -30,7 +30,7 @@ namespace Nemo
 
             this.View.BackColor = System.Drawing.SystemColors.ControlLight;
             this.View.Controls.Add(this.Label);
-            this.View.Location = new System.Drawing.Point(30, 52);
+            this.View.Location =this.Position;
             this.View.Name = $"tile{this.Value}";
             this.View.Padding = new System.Windows.Forms.Padding(5);
             this.View.Size = new System.Drawing.Size(131, 92);

@@ -29,7 +29,7 @@ namespace Nemo
 
         public void HandleTick(object sender, EventArgs e)
         {
-            this.View.MoveTiles(this.Model.GetGameSpeed());
+            this.View.MoveTiles(this.Model.GetGameSpeed(), this.Model.GetRowIndex());
         }
         private void ClickOnStart(object sender, EventArgs e) {
             this.View.StartGameTimer();
@@ -37,7 +37,6 @@ namespace Nemo
             this.View.EnableStopButton();
             this.Model.IncreaseGameCount();
             this.View.SetInfoText(this.Model.GetInfoRunning());
-            this.DrawTile();
         }
         private void ClickOnStopt(object sender, EventArgs e) {
             this.View.StopGameTimer();
@@ -50,12 +49,6 @@ namespace Nemo
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
             this.ClearTiles();
-        }
-
-        private void DrawTile()
-        {
-                        Tile tile = new Tile(2, new System.Drawing.Point(10, 10));
-            this.View.RenderTile(tile.GetView());
         }
 
         private void ClearTiles()

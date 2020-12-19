@@ -10,10 +10,16 @@ namespace Nemo
         private int points = 0;
         private int speed = 5;
         private int speedIncrement = 5;
+        private int rowIndex = 0;
 
         public int GetGameSpeed()
         {
             return this.speed;
+        }
+
+        public int GetRowIndex()
+        {
+            return this.rowIndex;
         }
 
         public String GetInfoIdle() 
