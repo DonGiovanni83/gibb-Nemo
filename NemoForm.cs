@@ -30,6 +30,13 @@ namespace Nemo
             this.panelSpiel.Controls.Clear();
         }
 
+        public void MoveTiles(int speed)
+        {
+            foreach (Control tile in this.panelSpiel.Controls)
+            {
+                tile.Location = new Point(tile.Location.X, tile.Location.Y + speed);
+            }
+        }
         public void StartGameTimer()
         {
             this.timerGame.Start();
@@ -96,6 +103,11 @@ namespace Nemo
         public void AddRestartButtonClickHandler(EventHandler Handler)
         {
             this.btnRestart.Click += Handler;
+        }
+
+        public void SetOnTickAction(EventHandler Handler)
+        {
+            this.timerGame.Tick += Handler;
         }
     }
 }

@@ -24,9 +24,13 @@ namespace Nemo
             this.View.AddStopButtonClickHandler(new EventHandler(this.ClickOnStopt));
             this.View.AddRestartButtonClickHandler(new EventHandler(this.ClickOnRestart));
 
-            
+            this.View.SetOnTickAction(new EventHandler(this.HandleTick));
         }
 
+        public void HandleTick(object sender, EventArgs e)
+        {
+            this.View.MoveTiles(this.Model.GetGameSpeed());
+        }
         private void ClickOnStart(object sender, EventArgs e) {
             this.View.StartGameTimer();
             this.View.DisableStartButton();

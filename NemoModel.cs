@@ -11,6 +11,11 @@ namespace Nemo
         private int speed = 5;
         private int speedIncrement = 5;
 
+        public int GetGameSpeed()
+        {
+            return this.speed;
+        }
+
         public String GetInfoIdle() 
         { 
             return $"Klicke auf Start\ndas ist die {this.gameCount} Spielrunde"; 
