@@ -20,9 +20,11 @@ namespace Nemo
 
         private void SubscribeView()
         {
-            this.View.AddStartButtonClickHandler(new System.EventHandler(this.ClickOnStart));
-            this.View.GetStopButton().Click += new System.EventHandler(this.ClickOnStopt);
-            this.View.GetRestartButton().Click += new System.EventHandler(this.ClickOnRestart);
+            this.View.AddStartButtonClickHandler(new EventHandler(this.ClickOnStart));
+            this.View.AddStopButtonClickHandler(new EventHandler(this.ClickOnStopt));
+            this.View.AddRestartButtonClickHandler(new EventHandler(this.ClickOnRestart));
+
+            
         }
 
         private void ClickOnStart(object sender, EventArgs e) {
@@ -31,6 +33,7 @@ namespace Nemo
             this.View.EnableStopButton();
             this.Model.IncreaseGameCount();
             this.View.SetInfoText(this.Model.GetInfoRunning());
+            this.DrawTile();
         }
         private void ClickOnStopt(object sender, EventArgs e) {
             this.View.StopGameTimer();
@@ -42,6 +45,18 @@ namespace Nemo
             this.View.DisableRestartButton();
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
+            this.ClearTiles();
+        }
+
+        private void DrawTile()
+        {
+                        Tile tile = new Tile(2, new System.Drawing.Point(10, 10));
+            this.View.RenderTile(tile.GetView());
+        }
+
+        private void ClearTiles()
+        {
+            this.View.ClearTiles();
         }
     }
 }

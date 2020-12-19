@@ -12,9 +12,22 @@ namespace Nemo
 {
     public partial class NemoForm : Form
     {
+
+        private List<Label> VisibleSquares;
         public NemoForm()
         {
             InitializeComponent();
+            this.VisibleSquares = new List<Label>();
+        }
+
+        public void RenderTile(Panel tile)
+        {
+            this.panelSpiel.Controls.Add(tile);
+        }
+
+        public void ClearTiles()
+        {
+            this.panelSpiel.Controls.Clear();
         }
 
         public void StartGameTimer()

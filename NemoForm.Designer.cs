@@ -41,6 +41,7 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.timerGame = new System.Windows.Forms.Timer(this.components);
             this.InfoPanel.SuspendLayout();
+            this.panelSpiel.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtInfo
@@ -134,6 +135,7 @@
             this.btnRestart.TabIndex = 7;
             this.btnRestart.Text = "Neu starten";
             this.btnRestart.UseVisualStyleBackColor = true;
+
             // 
             // NemoForm
             // 
@@ -152,6 +154,7 @@
             this.Name = "NemoForm";
             this.Text = "Nemo";
             this.InfoPanel.ResumeLayout(false);
+            this.panelSpiel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
