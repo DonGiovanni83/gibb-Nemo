@@ -77,6 +77,7 @@ namespace Nemo
                 label.Click += new EventHandler((s, e) => {
                     label.BackColor = Color.Pink;
                     this.ClickOnRedTileCallback.Invoke(value);
+                    label.Enabled = false;
                 });
             } else
             {
@@ -133,6 +134,11 @@ namespace Nemo
         public void AddRestartButtonClickHandler(EventHandler handler)
         {
             this.btnRestart.Click += handler;
+        }
+
+        public void DisableRedTile(int value)
+        {
+
         }
 
         public void SetOnTickAction(EventHandler handler)

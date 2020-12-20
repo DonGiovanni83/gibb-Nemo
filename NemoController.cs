@@ -71,6 +71,7 @@ namespace Nemo
         {
             this.Model.AddPoints(value);
             this.Model.IncreaseSpeed();
+            this.View.DisableRedTile(value);
         }
 
         private void UpdateGame()
