@@ -72,6 +72,7 @@
             // 
             // panelSpiel
             // 
+            this.panelSpiel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelSpiel.Location = new System.Drawing.Point(14, 126);
             this.panelSpiel.Name = "panelSpiel";
             this.panelSpiel.Size = new System.Drawing.Size(598, 389);
@@ -154,12 +155,12 @@
             this.lblPointsTitle.Text = "Punkte:";
             this.lblPointsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // speedPanel
+            // panelSpeed
             // 
             this.panelSpeed.BackColor = System.Drawing.Color.LightBlue;
             this.panelSpeed.Controls.Add(this.panelSpeedProgress);
             this.panelSpeed.Location = new System.Drawing.Point(16, 566);
-            this.panelSpeed.Name = "speedPanel";
+            this.panelSpeed.Name = "panelSpeed";
             this.panelSpeed.Size = new System.Drawing.Size(596, 42);
             this.panelSpeed.TabIndex = 10;
             // 
@@ -168,7 +169,7 @@
             this.panelSpeedProgress.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panelSpeedProgress.Controls.Add(this.lblSpeed);
             this.panelSpeedProgress.Location = new System.Drawing.Point(5, 5);
-            this.panelSpeedProgress.Name = "panel1";
+            this.panelSpeedProgress.Name = "panelSpeedProgress";
             this.panelSpeedProgress.Size = new System.Drawing.Size(339, 32);
             this.panelSpeedProgress.TabIndex = 10;
             // 
