@@ -7,8 +7,8 @@ namespace Nemo
     {
         private int gameCount = 0;
         private int Points = 0;
-        private int speed = 5;
-        private int speedIncrement = 5;
+        private int Speed = 5;
+        private int speedIncrement = 2;
         private int rowIndex = 0;
         public List<TileRow> GameBoard { get; private set; } = new List<TileRow>();
         public int TileRowsCount { get; private set; }
@@ -45,7 +45,7 @@ namespace Nemo
         }
         public int GetGameSpeed()
         {
-            return this.speed;
+            return this.Speed;
         }
 
         public int GetRowIndex()
@@ -66,34 +66,43 @@ namespace Nemo
         public String GetInfoErrorClick() 
         { 
             return $"Du hast das falsche Feld geklickt - Die Spielrunde ist vorüber\n" +
-                $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.speed} erreicht"; 
+                $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.Speed} erreicht"; 
         }
         
         public String GetInfoErrorMissed() 
         {
             return $"Du hast in der untersten Reihe nicht geklickt - Die Spielrunde ist vorüber\n" +
-                  $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.speed} erreicht";
+                  $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.Speed} erreicht";
         } 
 
         public String GetInfoErrorStopped() 
         {
             return $"Du hast das Spiel gestoppt - Die Spielrunde ist vorüber\n" +
-                  $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.speed} erreicht";
+                  $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.Speed} erreicht";
         }     
         
-        public void IncreaseGameCount()
+        private void IncreaseGameCount()
         {
             this.gameCount++;
         }
 
         public void IncreaseSpeed()
         {
-            this.speed += this.speedIncrement;
+            this.Speed += this.speedIncrement;
         }
 
         public void AddPoints(int points)
         {
             this.Points += points;
+        }
+
+        public void ResetGame()
+        {
+            this.IncreaseGameCount();
+            this.Points = 0;
+            this.GameBoard.Clear();
+            this.Speed = 5;
+            this.rowIndex = 0;
         }
     }
 }

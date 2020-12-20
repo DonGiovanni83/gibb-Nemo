@@ -38,7 +38,6 @@ namespace Nemo
             this.View.StartGameTimer();
             this.View.DisableStartButton();
             this.View.EnableStopButton();
-            this.Model.IncreaseGameCount();
             this.View.SetInfoText(this.Model.GetInfoRunning());
         }
         private void ClickOnStop(object sender, EventArgs e) {
@@ -52,7 +51,7 @@ namespace Nemo
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
             this.View.ClearBoard();
-            // TODO reset game
+            this.Model.ResetGame();// TODO reset game
         }
 
         private void ClickOnWrongTile(object sender, EventArgs e)
