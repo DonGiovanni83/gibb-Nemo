@@ -8,7 +8,7 @@ namespace Nemo
 
         public int Value { get; }
         public int Y { get; private set; }
-        public Color Background { get; }
+        public Color Background { get; set; }
         public int Width { get; }
         public int Height { get; }
         public int X { get;}

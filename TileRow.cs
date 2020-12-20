@@ -14,6 +14,7 @@ namespace Nemo
         private Color Background;
 
         public List<Tile> Tiles { get; private set; }
+        public int RedTileIndex { get; private set; }
 
         public TileRow(int rowIndex, int tileCount, int tileWidth, int tileHeight)
         {
@@ -33,6 +34,9 @@ namespace Nemo
         {
             this.Tiles = new List<Tile>();
 
+            Random rdm = new Random();
+            this.RedTileIndex = rdm.Next(0, this.RowLength);
+
             for(int i =0; i<this.RowLength; i++)
             {
                 int tileValue = i + this.RowIndex * this.RowLength + 1;
@@ -44,6 +48,11 @@ namespace Nemo
                     this.TileWidth,
                     this.TileHeight
                     );
+
+                if(i == this.RedTileIndex)
+                {
+                    newTile.Background = Color.Red;
+                }
 
                 this.Tiles.Add(newTile);
             }
