@@ -6,7 +6,7 @@ namespace Nemo
     class NemoModel
     {
         private int gameCount = 0;
-        private int Points = 0;
+        public int Points { get; private set; } = 0;
         private int Speed = 5;
         private int speedIncrement = 2;
         private int rowIndex = 0;

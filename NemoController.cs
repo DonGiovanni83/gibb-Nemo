@@ -136,6 +136,8 @@ namespace Nemo
                         );
                 }
             }
+
+            this.View.SetPoints(this.Model.Points);
         }
 
         private void CheckBoard()

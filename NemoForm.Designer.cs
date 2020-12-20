@@ -40,8 +40,9 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
             this.timerGame = new System.Windows.Forms.Timer(this.components);
+            this.lblPoints = new System.Windows.Forms.Label();
+            this.lblPointsTitle = new System.Windows.Forms.Label();
             this.InfoPanel.SuspendLayout();
-            this.panelSpiel.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtInfo
@@ -135,13 +136,35 @@
             this.btnRestart.TabIndex = 7;
             this.btnRestart.Text = "Neu starten";
             this.btnRestart.UseVisualStyleBackColor = true;
-
+            // 
+            // lblPoints
+            // 
+            this.lblPoints.BackColor = System.Drawing.Color.White;
+            this.lblPoints.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPoints.Location = new System.Drawing.Point(644, 165);
+            this.lblPoints.Name = "lblPoints";
+            this.lblPoints.Size = new System.Drawing.Size(129, 57);
+            this.lblPoints.TabIndex = 8;
+            this.lblPoints.Text = "142";
+            this.lblPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPointsTitle
+            // 
+            this.lblPointsTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPointsTitle.Location = new System.Drawing.Point(642, 126);
+            this.lblPointsTitle.Name = "lblPointsTitle";
+            this.lblPointsTitle.Size = new System.Drawing.Size(131, 32);
+            this.lblPointsTitle.TabIndex = 9;
+            this.lblPointsTitle.Text = "Punkte:";
+            this.lblPointsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NemoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 657);
+            this.Controls.Add(this.lblPointsTitle);
+            this.Controls.Add(this.lblPoints);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
@@ -154,7 +177,6 @@
             this.Name = "NemoForm";
             this.Text = "Nemo";
             this.InfoPanel.ResumeLayout(false);
-            this.panelSpiel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +195,8 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Timer timerGame;
+        private System.Windows.Forms.Label lblPoints;
+        private System.Windows.Forms.Label lblPointsTitle;
     }
 }
 

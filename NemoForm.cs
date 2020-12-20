@@ -49,7 +49,7 @@ namespace Nemo
             newLabel.Dock = DockStyle.Fill;
             newLabel.Location = new Point(5, 5);
             newLabel.Name = $"label${value}";
-            newLabel.Size = new Size(width - 10, height - 10);
+            newLabel.Size = new Size(width, height);
             newLabel.TabIndex = 0;
             newLabel.TextAlign = ContentAlignment.MiddleCenter;
 
@@ -138,6 +138,11 @@ namespace Nemo
         public void SetOnTickAction(EventHandler handler)
         {
             this.timerGame.Tick += handler;
+        }
+
+        public void SetPoints(int points)
+        {
+            this.lblPoints.Text = points.ToString();
         }
         public int GetBoardHeight()
         {
