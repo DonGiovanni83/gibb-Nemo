@@ -15,6 +15,7 @@ namespace Nemo
 
             this.Model.CreateNewBoard(5, 5, this.View.GetBoardWidth(), this.View.GetBoardHeight());
             this.View.SetInfoText(this.Model.GetInfoIdle());
+            this.ResetGame();
             this.SubscribeView();            
         }
 
@@ -55,7 +56,7 @@ namespace Nemo
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
             this.View.ClearBoard();
-            this.Model.ResetGame();
+            this.ResetGame();
         }
 
         private void ClickOnWrongTile(object sender, EventArgs e)
@@ -83,7 +84,7 @@ namespace Nemo
 
         private void MoveSingleTileRow(TileRow row)
         {
-            row.MoveDown(this.Model.GetGameSpeed());
+            row.MoveDown(this.Model.Speed);
 
             if (!this.TileRowIsInBoardRange(row))
             {
@@ -138,6 +139,7 @@ namespace Nemo
             }
 
             this.View.SetPoints(this.Model.Points);
+            this.View.DisplaySpeed(this.Model.Speed, this.Model.GetSpeedProgress());
         }
 
         private void CheckBoard()
@@ -149,6 +151,13 @@ namespace Nemo
                 this.View.EnableRestartButton();
                 this.View.SetInfoText(this.Model.GetInfoErrorMissed());
             }
+        }
+
+        private void ResetGame()
+        {
+            this.Model.ResetGame();
+            this.View.SetPoints(this.Model.Points);
+            this.View.DisplaySpeed(this.Model.Points, this.Model.GetSpeedProgress());
         }
     }
 }

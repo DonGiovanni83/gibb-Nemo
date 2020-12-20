@@ -140,6 +140,13 @@ namespace Nemo
             this.timerGame.Tick += handler;
         }
 
+        public void DisplaySpeed(int speed, double speedProgress)
+        {
+            int maxWidth = this.panelSpeed.Width - 10;
+            this.panelSpeedProgress.Width = Convert.ToInt16(maxWidth * speedProgress);
+            this.lblSpeed.Text = speed.ToString();
+        }
+
         public void SetPoints(int points)
         {
             this.lblPoints.Text = points.ToString();

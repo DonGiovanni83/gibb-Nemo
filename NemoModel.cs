@@ -5,11 +5,17 @@ namespace Nemo
 {
     class NemoModel
     {
-        private int gameCount = 0;
+        private int GameCount = 1;
         public int Points { get; private set; } = 0;
-        private int Speed = 5;
-        private int speedIncrement = 2;
+
+        public int Speed { get; private set; } = 2;
+        public int MinSpeed { get; private set; } = 2;
+        public int MaxSpeed { get; private set; } = 30;
+        
+        private int SpeedIncrement = 2;
+
         private int rowIndex = 0;
+
         public List<TileRow> GameBoard { get; private set; } = new List<TileRow>();
         public int TileRowsCount { get; private set; }
         public int TileColumnsCount { get; private set; }
@@ -43,10 +49,6 @@ namespace Nemo
             this.GameBoard.ForEach(tileRow => { copy.Add(tileRow); });
             return copy ;
         }
-        public int GetGameSpeed()
-        {
-            return this.Speed;
-        }
 
         public int GetRowIndex()
         {
@@ -55,7 +57,7 @@ namespace Nemo
 
         public String GetInfoIdle() 
         { 
-            return $"Klicke auf Start\ndas ist die {this.gameCount} Spielrunde"; 
+            return $"Klicke auf Start\ndas ist die {this.GameCount} Spielrunde"; 
         }
 
         public String GetInfoRunning() 
@@ -83,12 +85,18 @@ namespace Nemo
         
         private void IncreaseGameCount()
         {
-            this.gameCount++;
+            this.GameCount++;
         }
 
         public void IncreaseSpeed()
         {
-            this.Speed += this.speedIncrement;
+            if (this.Speed + this.SpeedIncrement <= this.MaxSpeed)
+            {
+                this.Speed += this.SpeedIncrement;
+            } else
+            {
+                this.Speed = this.MaxSpeed;
+            }
         }
 
         public void AddPoints(int points)
@@ -101,8 +109,13 @@ namespace Nemo
             this.IncreaseGameCount();
             this.Points = 0;
             this.GameBoard.Clear();
-            this.Speed = 5;
+            this.Speed = this.MinSpeed;
             this.rowIndex = 0;
+        }
+
+        public double GetSpeedProgress()
+        {
+            return Convert.ToDouble(this.Speed) / Convert.ToDouble(this.MaxSpeed);
         }
     }
 }

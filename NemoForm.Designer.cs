@@ -32,17 +32,21 @@
             this.txtInfo = new System.Windows.Forms.Label();
             this.InfoPanel = new System.Windows.Forms.Panel();
             this.panelSpiel = new System.Windows.Forms.Panel();
-            this.lblMinVelocity = new System.Windows.Forms.Label();
-            this.lblVelocity = new System.Windows.Forms.Label();
-            this.lblMaxVelocity = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblMinSpeed = new System.Windows.Forms.Label();
+            this.lblSpeedTitle = new System.Windows.Forms.Label();
+            this.lblMaxSpeed = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
             this.timerGame = new System.Windows.Forms.Timer(this.components);
             this.lblPoints = new System.Windows.Forms.Label();
             this.lblPointsTitle = new System.Windows.Forms.Label();
+            this.panelSpeed = new System.Windows.Forms.Panel();
+            this.panelSpeedProgress = new System.Windows.Forms.Panel();
+            this.lblSpeed = new System.Windows.Forms.Label();
             this.InfoPanel.SuspendLayout();
+            this.panelSpeed.SuspendLayout();
+            this.panelSpeedProgress.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtInfo
@@ -73,40 +77,32 @@
             this.panelSpiel.Size = new System.Drawing.Size(598, 389);
             this.panelSpiel.TabIndex = 2;
             // 
-            // lblMinVelocity
+            // lblMinSpeed
             // 
-            this.lblMinVelocity.AutoSize = true;
-            this.lblMinVelocity.Location = new System.Drawing.Point(16, 535);
-            this.lblMinVelocity.Name = "lblMinVelocity";
-            this.lblMinVelocity.Size = new System.Drawing.Size(28, 15);
-            this.lblMinVelocity.TabIndex = 4;
-            this.lblMinVelocity.Text = "min";
+            this.lblMinSpeed.AutoSize = true;
+            this.lblMinSpeed.Location = new System.Drawing.Point(16, 535);
+            this.lblMinSpeed.Name = "lblMinSpeed";
+            this.lblMinSpeed.Size = new System.Drawing.Size(28, 15);
+            this.lblMinSpeed.TabIndex = 4;
+            this.lblMinSpeed.Text = "min";
             // 
-            // lblVelocity
+            // lblSpeedTitle
             // 
-            this.lblVelocity.AutoSize = true;
-            this.lblVelocity.Location = new System.Drawing.Point(271, 535);
-            this.lblVelocity.Name = "lblVelocity";
-            this.lblVelocity.Size = new System.Drawing.Size(94, 15);
-            this.lblVelocity.TabIndex = 5;
-            this.lblVelocity.Text = "Geschwindigkeit";
+            this.lblSpeedTitle.AutoSize = true;
+            this.lblSpeedTitle.Location = new System.Drawing.Point(271, 535);
+            this.lblSpeedTitle.Name = "lblSpeedTitle";
+            this.lblSpeedTitle.Size = new System.Drawing.Size(94, 15);
+            this.lblSpeedTitle.TabIndex = 5;
+            this.lblSpeedTitle.Text = "Geschwindigkeit";
             // 
-            // lblMaxVelocity
+            // lblMaxSpeed
             // 
-            this.lblMaxVelocity.AutoSize = true;
-            this.lblMaxVelocity.Location = new System.Drawing.Point(562, 538);
-            this.lblMaxVelocity.Name = "lblMaxVelocity";
-            this.lblMaxVelocity.Size = new System.Drawing.Size(29, 15);
-            this.lblMaxVelocity.TabIndex = 6;
-            this.lblMaxVelocity.Text = "max";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(16, 573);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(596, 29);
-            this.progressBar1.TabIndex = 0;
-            this.progressBar1.Value = 50;
+            this.lblMaxSpeed.AutoSize = true;
+            this.lblMaxSpeed.Location = new System.Drawing.Point(562, 538);
+            this.lblMaxSpeed.Name = "lblMaxSpeed";
+            this.lblMaxSpeed.Size = new System.Drawing.Size(29, 15);
+            this.lblMaxSpeed.TabIndex = 6;
+            this.lblMaxSpeed.Text = "max";
             // 
             // btnStart
             // 
@@ -145,7 +141,7 @@
             this.lblPoints.Name = "lblPoints";
             this.lblPoints.Size = new System.Drawing.Size(129, 57);
             this.lblPoints.TabIndex = 8;
-            this.lblPoints.Text = "142";
+            this.lblPoints.Text = "0";
             this.lblPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblPointsTitle
@@ -158,25 +154,58 @@
             this.lblPointsTitle.Text = "Punkte:";
             this.lblPointsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // speedPanel
+            // 
+            this.panelSpeed.BackColor = System.Drawing.Color.LightBlue;
+            this.panelSpeed.Controls.Add(this.panelSpeedProgress);
+            this.panelSpeed.Location = new System.Drawing.Point(16, 566);
+            this.panelSpeed.Name = "speedPanel";
+            this.panelSpeed.Size = new System.Drawing.Size(596, 42);
+            this.panelSpeed.TabIndex = 10;
+            // 
+            // panelSpeedProgress
+            // 
+            this.panelSpeedProgress.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panelSpeedProgress.Controls.Add(this.lblSpeed);
+            this.panelSpeedProgress.Location = new System.Drawing.Point(5, 5);
+            this.panelSpeedProgress.Name = "panel1";
+            this.panelSpeedProgress.Size = new System.Drawing.Size(339, 32);
+            this.panelSpeedProgress.TabIndex = 10;
+            // 
+            // lblSpeed
+            // 
+            this.lblSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSpeed.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSpeed.ForeColor = System.Drawing.Color.LightBlue;
+            this.lblSpeed.Location = new System.Drawing.Point(0, 0);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Padding = new System.Windows.Forms.Padding(5);
+            this.lblSpeed.Size = new System.Drawing.Size(339, 32);
+            this.lblSpeed.TabIndex = 0;
+            this.lblSpeed.Text = "5";
+            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // NemoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 657);
+            this.Controls.Add(this.panelSpeed);
             this.Controls.Add(this.lblPointsTitle);
             this.Controls.Add(this.lblPoints);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.lblMaxVelocity);
-            this.Controls.Add(this.lblVelocity);
-            this.Controls.Add(this.lblMinVelocity);
+            this.Controls.Add(this.lblMaxSpeed);
+            this.Controls.Add(this.lblSpeedTitle);
+            this.Controls.Add(this.lblMinSpeed);
             this.Controls.Add(this.panelSpiel);
             this.Controls.Add(this.InfoPanel);
             this.Name = "NemoForm";
             this.Text = "Nemo";
             this.InfoPanel.ResumeLayout(false);
+            this.panelSpeed.ResumeLayout(false);
+            this.panelSpeedProgress.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,16 +216,18 @@
         private System.Windows.Forms.Label txtInfo;
         private System.Windows.Forms.Panel InfoPanel;
         private System.Windows.Forms.Panel panelSpiel;
-        private System.Windows.Forms.Label lblMinVelocity;
-        private System.Windows.Forms.Label lblVelocity;
-        private System.Windows.Forms.Label lblMaxVelocity;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblMinSpeed;
+        private System.Windows.Forms.Label lblSpeedTitle;
+        private System.Windows.Forms.Label lblMaxSpeed;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Timer timerGame;
         private System.Windows.Forms.Label lblPoints;
         private System.Windows.Forms.Label lblPointsTitle;
+        private System.Windows.Forms.Panel panelSpeed;
+        private System.Windows.Forms.Panel panelSpeedProgress;
+        private System.Windows.Forms.Label lblSpeed;
     }
 }
 
