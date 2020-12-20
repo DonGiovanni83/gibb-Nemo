@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,6 +14,11 @@ namespace Nemo
         public int GetBoardHeight()
         {
             return this.panelSpiel.Height;
+        }
+        
+        public int GetBoardWidth()
+        {
+            return this.panelSpiel.Width;
         }
 
         public void StartGameTimer()
@@ -94,7 +98,7 @@ namespace Nemo
             this.panelSpiel.Controls.Clear();
         }
 
-        public void RenderTile(int value, int x, int y, Color Background)
+        public void RenderTile(int value, int x, int y,int width, int height, Color Background)
         {
 
             Control[] tiles = this.panelSpiel.Controls.Find($"tile{value}", false);
@@ -114,7 +118,7 @@ namespace Nemo
                 newTilePanel.Location = location;
                 newTilePanel.Name = $"tile{value}";
                 newTilePanel.Padding = new Padding(5);
-                newTilePanel.Size = new Size(131, 92);
+                newTilePanel.Size = new Size(width, height);
                 newTilePanel.TabIndex = 0;
 
 
@@ -123,7 +127,7 @@ namespace Nemo
                 newTileLabel.Dock = DockStyle.Fill;
                 newTileLabel.Location = new Point(5, 5);
                 newTileLabel.Name = $"label${value}";
-                newTileLabel.Size = new Size(121, 82);
+                newTileLabel.Size = new Size(width - 10, height -10);
                 newTileLabel.TabIndex = 0;
                 newTileLabel.TextAlign = ContentAlignment.MiddleCenter;
 

@@ -10,27 +10,37 @@ namespace Nemo
         private int speed = 5;
         private int speedIncrement = 5;
         private int rowIndex = 0;
-        private List<Tile> gameBoard = new List<Tile>(); 
+        public List<TileRow> GameBoard { get; private set; } = new List<TileRow>();
+        public int TileRowsCount { get; private set; }
+        public int TileColumnsCount { get; private set; }
+        public int TileWidth { get; private set; }
+        public int TileHeight { get; private set; }
+
+        internal void CreateNewBoard(int tileRowsCount, int tileColumnsCount, int boardWidth, int boardHeight)
+        {
+            this.TileRowsCount = tileRowsCount;
+            this.TileColumnsCount = tileColumnsCount;
+            int width = boardWidth / tileColumnsCount;
+            int height = boardHeight / tileRowsCount;
+            this.TileWidth = width;
+            this.TileHeight = height;
+        }
 
         public void CreateNewTileRow()
         {
+            TileRow newTileRow = new TileRow(this.rowIndex, 5, this.TileWidth, this.TileHeight );
             this.rowIndex++;
-            Tile newTile = new Tile(this.rowIndex, 0, -92);
-            this.gameBoard.Add(newTile);
+            this.GameBoard.Add(newTileRow);
         }
 
-        public void RemoveTile(Tile tile)
+        public void RemoveTileRow(TileRow tileRow)
         {
-            this.gameBoard.Remove(tile);
+            this.GameBoard.Remove(tileRow);
         }
-        public List<Tile> GetGameBoard()
+        public List<TileRow> GetGameBoardCopy()
         {
-            return this.gameBoard;
-        }
-        public List<Tile> GetGameBoardCopy()
-        {
-            List<Tile> copy = new List<Tile>();
-            this.gameBoard.ForEach(tile => { copy.Add(tile); });
+            List<TileRow> copy = new List<TileRow>();
+            this.GameBoard.ForEach(tileRow => { copy.Add(tileRow); });
             return copy ;
         }
         public int GetGameSpeed()

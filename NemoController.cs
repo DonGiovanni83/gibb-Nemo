@@ -12,14 +12,15 @@ namespace Nemo
             this.Model = model;
             this.View = view;
 
+            this.Model.CreateNewBoard(5, 5, this.View.GetBoardWidth(), this.View.GetBoardHeight());
             this.View.SetInfoText(this.Model.GetInfoIdle());
-            this.SubscribeView();
+            this.SubscribeView();            
         }
 
         private void SubscribeView()
         {
             this.View.AddStartButtonClickHandler(new EventHandler(this.ClickOnStart));
-            this.View.AddStopButtonClickHandler(new EventHandler(this.ClickOnStopt));
+            this.View.AddStopButtonClickHandler(new EventHandler(this.ClickOnStop));
             this.View.AddRestartButtonClickHandler(new EventHandler(this.ClickOnRestart));
 
             this.View.SetOnTickAction(new EventHandler(this.HandleTick));
@@ -37,7 +38,7 @@ namespace Nemo
             this.Model.IncreaseGameCount();
             this.View.SetInfoText(this.Model.GetInfoRunning());
         }
-        private void ClickOnStopt(object sender, EventArgs e) {
+        private void ClickOnStop(object sender, EventArgs e) {
             this.View.StopGameTimer();
             this.View.DisableStopButton();
             this.View.EnableRestartButton();
@@ -48,30 +49,31 @@ namespace Nemo
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
             this.View.ClearBoard();
+            // TODO reset game
         }
 
         private void UpdateGame()
         {
-            foreach (Tile tile in this.Model.GetGameBoardCopy())
+            foreach (TileRow row in this.Model.GetGameBoardCopy())
             {
-                this.MoveSingleTile(tile);
+                this.MoveSingleTileRow(row);
             }
             this.CreateNewTilesIfNecessary();
         }
 
-        private void MoveSingleTile(Tile tile)
+        private void MoveSingleTileRow(TileRow row)
         {
-            tile.MoveDown(this.Model.GetGameSpeed());
+            row.MoveDown(this.Model.GetGameSpeed());
 
-            if (!this.TileIsInBoardRange(tile))
+            if (!this.TileRowIsInBoardRange(row))
             {
-                this.Model.RemoveTile(tile);
+                this.Model.RemoveTileRow(row);
             }
         }
 
-        private bool TileIsInBoardRange(Tile tile)
+        private bool TileRowIsInBoardRange(TileRow row)
         {
-            return this.View.GetBoardHeight() + 92 > tile.GetY();
+            return this.View.GetBoardHeight() + this.Model.TileHeight > row.Y;
         }
 
         private void CreateNewTilesIfNecessary()
@@ -86,11 +88,11 @@ namespace Nemo
         {
             // First find the y value of the tile row on top
             int currentMinY = 0;
-            foreach (Tile tile in this.Model.GetGameBoard())
+            foreach (TileRow tileRow in this.Model.GameBoard)
             {
-                if (currentMinY > tile.GetY())
+                if (currentMinY > tileRow.Y)
                 {
-                    currentMinY = tile.GetY();
+                    currentMinY = tileRow.Y;
                 }
             }
 
@@ -100,14 +102,19 @@ namespace Nemo
 
         public void RenderBoard()
         {
-            foreach (Tile tile in this.Model.GetGameBoardCopy())
+            foreach (TileRow tileRow in this.Model.GetGameBoardCopy())
             {
-                this.View.RenderTile(
-                    tile.GetValue(),
-                    tile.GetX(),
-                    tile.GetY(),
-                    tile.GetBackground()
-                    );
+                foreach (Tile tile in tileRow.Tiles)
+                {
+                    this.View.RenderTile(
+                        tile.Value,
+                        tile.X,
+                        tile.Y,
+                        tile.Width,
+                        tile.Height,
+                        tile.Background
+                        );
+                }
             }
         }
     }
