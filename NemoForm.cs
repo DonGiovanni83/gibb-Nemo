@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -81,6 +82,35 @@ namespace Nemo
             {
                 label.Click += this.ClickOnWrongTileHandler; 
             }
+        }
+
+        public bool BoardContainsMissedRedTiles()
+        {
+            bool containsMissing = false;
+            List<Control> redTiles = this.GetRedTiles();
+            foreach (Control redTile in redTiles)
+            {
+                if(redTile.Location.Y >= this.panelSpiel.Height)
+                {
+                    containsMissing = true;
+                }
+            }
+            return containsMissing;
+        }
+
+        private List<Control> GetRedTiles()
+        {
+            List<Control> redTiles = new List<Control>();
+
+            foreach (Control tile in this.panelSpiel.Controls)
+            {
+                if(tile.Controls[0].BackColor == Color.Red)
+                {
+                    redTiles.Add(tile);
+                }
+            }
+
+            return redTiles;
         }
 
         public void AddClickOnWrongTileHandler(EventHandler handler)

@@ -33,25 +33,29 @@ namespace Nemo
         {
             this.UpdateGame();
             this.RenderBoard();
+            this.CheckBoard();
         }
+
         private void ClickOnStart(object sender, EventArgs e) {
             this.View.StartGameTimer();
             this.View.DisableStartButton();
             this.View.EnableStopButton();
             this.View.SetInfoText(this.Model.GetInfoRunning());
         }
+
         private void ClickOnStop(object sender, EventArgs e) {
             this.View.StopGameTimer();
             this.View.DisableStopButton();
             this.View.EnableRestartButton();
             this.View.SetInfoText(this.Model.GetInfoErrorStopped());
         }
+
         private void ClickOnRestart(object sender, EventArgs e) {
             this.View.DisableRestartButton();
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
             this.View.ClearBoard();
-            this.Model.ResetGame();// TODO reset game
+            this.Model.ResetGame();
         }
 
         private void ClickOnWrongTile(object sender, EventArgs e)
@@ -116,7 +120,7 @@ namespace Nemo
             return currentMinY >= 0;
         }
 
-        public void RenderBoard()
+        private void RenderBoard()
         {
             foreach (TileRow tileRow in this.Model.GetGameBoardCopy())
             {
@@ -131,6 +135,17 @@ namespace Nemo
                         tile.Background
                         );
                 }
+            }
+        }
+
+        private void CheckBoard()
+        {
+            if (this.View.BoardContainsMissedRedTiles())
+            {
+                this.View.StopGameTimer();
+                this.View.DisableStopButton();
+                this.View.EnableRestartButton();
+                this.View.SetInfoText(this.Model.GetInfoErrorMissed());
             }
         }
     }
