@@ -1,58 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Nemo
 {
     class Tile
     {
         
-        private int Value;
-        private Point Position;
-        private Panel View;
-        private Label Label;
+        private readonly int Value;
+        private int Y;
+        private readonly int X;
         private Color Background;
-        public Tile(int value, Point position)
+
+        public Tile(int value, int x, int y)
         {
             this.Value = value;
-            this.Position = position;
-            this.InitializeComponent();
+            this.X = x;
+            this.Y = y;
+            this.Background = System.Drawing.SystemColors.ControlDark;
+            this.Background = System.Drawing.SystemColors.ControlDark;
         }   
-        
-        private void InitializeComponent()
+
+        public int GetY()
         {
-            this.View = new Panel();
-            this.Label = new Label();
-            this.View.SuspendLayout();
-
-            this.View.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.View.Controls.Add(this.Label);
-            this.View.Location =this.Position;
-            this.View.Name = $"tile{this.Value}";
-            this.View.Padding = new System.Windows.Forms.Padding(5);
-            this.View.Size = new System.Drawing.Size(131, 92);
-            this.View.TabIndex = 0;
-
-
-            this.Label.Text = this.Value.ToString();
-            this.Label.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Label.Location = new System.Drawing.Point(5, 5);
-            this.Label.Name = $"label${this.Value}";
-            this.Label.Size = new System.Drawing.Size(121, 82);
-            this.Label.TabIndex = 0;
-            this.Label.Text = this.Value.ToString();
-            this.Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
-            this.View.ResumeLayout(false);
+            return this.Y;
+        }
+        
+        public int GetX()
+        {
+            return this.X;
         }
 
-        public Panel GetView()
+        public int GetValue()
         {
-            return this.View;
+            return this.Value;
+        }
+
+        public Color GetBackground()
+        {
+            return this.Background;
+        }
+
+        public void MoveDown(int dY)
+        {
+            this.Y += dY;
+        }
+
+        public Tile Clone()
+        {
+            return new Tile(
+                this.Value,
+                this.X,
+                this.Y
+                );
         }
     }
 }

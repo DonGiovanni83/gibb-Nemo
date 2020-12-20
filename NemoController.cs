@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Nemo
 {
@@ -14,7 +12,7 @@ namespace Nemo
             this.Model = model;
             this.View = view;
 
-            //this.View.GetInfoText().Text = this.Model.GetInfoIdle();
+            this.View.SetInfoText(this.Model.GetInfoIdle());
             this.SubscribeView();
         }
 
@@ -29,7 +27,8 @@ namespace Nemo
 
         public void HandleTick(object sender, EventArgs e)
         {
-            this.View.MoveTiles(this.Model.GetGameSpeed(), this.Model.GetRowIndex());
+            this.UpdateGame();
+            this.RenderBoard();
         }
         private void ClickOnStart(object sender, EventArgs e) {
             this.View.StartGameTimer();
@@ -48,12 +47,68 @@ namespace Nemo
             this.View.DisableRestartButton();
             this.View.EnableStartButton();
             this.View.SetInfoText(this.Model.GetInfoIdle());
-            this.ClearTiles();
+            this.View.ClearBoard();
         }
 
-        private void ClearTiles()
+        private void UpdateGame()
         {
-            this.View.ClearTiles();
+            foreach (Tile tile in this.Model.GetGameBoardCopy())
+            {
+                this.MoveSingleTile(tile);
+            }
+            this.CreateNewTilesIfNecessary();
+        }
+
+        private void MoveSingleTile(Tile tile)
+        {
+            tile.MoveDown(this.Model.GetGameSpeed());
+
+            if (!this.TileIsInBoardRange(tile))
+            {
+                this.Model.RemoveTile(tile);
+            }
+        }
+
+        private bool TileIsInBoardRange(Tile tile)
+        {
+            return this.View.GetBoardHeight() + 92 > tile.GetY();
+        }
+
+        private void CreateNewTilesIfNecessary()
+        {
+            if (this.NewTileRowRequired())
+            {
+                this.Model.CreateNewTileRow();
+            }
+        }
+
+        private bool NewTileRowRequired()
+        {
+            // First find the y value of the tile row on top
+            int currentMinY = 0;
+            foreach (Tile tile in this.Model.GetGameBoard())
+            {
+                if (currentMinY > tile.GetY())
+                {
+                    currentMinY = tile.GetY();
+                }
+            }
+
+            // A new tile is required if the current minimal Y is >= 0
+            return currentMinY >= 0;
+        }
+
+        public void RenderBoard()
+        {
+            foreach (Tile tile in this.Model.GetGameBoardCopy())
+            {
+                this.View.RenderTile(
+                    tile.GetValue(),
+                    tile.GetX(),
+                    tile.GetY(),
+                    tile.GetBackground()
+                    );
+            }
         }
     }
 }

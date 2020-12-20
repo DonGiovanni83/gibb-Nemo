@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Nemo
 {
@@ -11,7 +10,29 @@ namespace Nemo
         private int speed = 5;
         private int speedIncrement = 5;
         private int rowIndex = 0;
+        private List<Tile> gameBoard = new List<Tile>(); 
 
+        public void CreateNewTileRow()
+        {
+            this.rowIndex++;
+            Tile newTile = new Tile(this.rowIndex, 0, -92);
+            this.gameBoard.Add(newTile);
+        }
+
+        public void RemoveTile(Tile tile)
+        {
+            this.gameBoard.Remove(tile);
+        }
+        public List<Tile> GetGameBoard()
+        {
+            return this.gameBoard;
+        }
+        public List<Tile> GetGameBoardCopy()
+        {
+            List<Tile> copy = new List<Tile>();
+            this.gameBoard.ForEach(tile => { copy.Add(tile); });
+            return copy ;
+        }
         public int GetGameSpeed()
         {
             return this.speed;

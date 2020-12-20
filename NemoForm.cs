@@ -1,86 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Nemo
 {
     public partial class NemoForm : Form
     {
-
-        private Queue<Label> VisibleSquares;
         public NemoForm()
         {
             InitializeComponent();
-            this.VisibleSquares = new Queue<Label>();
         }
 
-        public void RenderTile(Panel tile)
+        public int GetBoardHeight()
         {
-            this.panelSpiel.Controls.Add(tile);
+            return this.panelSpiel.Height;
         }
-
-        public void ClearTiles()
-        {
-            this.panelSpiel.Controls.Clear();
-        }
-
-        public void MoveTiles(int speed, int currentRowIndex)
-        {
-            foreach (Control tile in this.panelSpiel.Controls)
-            {
-                this.MoveSingleTile(tile, speed);
-            }
-            this.RenderNewTileIfNecessary(currentRowIndex);
-        }
-
-        private void MoveSingleTile(Control tile, int speed)
-        {
-            // Move tile
-            tile.Location = new Point(tile.Location.X, tile.Location.Y + speed);
-
-            // If out of Panel remove it
-            if (!this.TileIsInVisibleRange(tile))
-            {
-                this.panelSpiel.Controls.Remove(tile);
-            }
-        }
-
-        private bool TileIsInVisibleRange(Control tile)
-        {
-            return this.panelSpiel.Height > tile.Location.Y;
-        }
-
-        private void RenderNewTileIfNecessary(int rowIndex)
-        {
-            if (this.NewTileRowRequired())
-            {
-                Tile newTile = new Tile(rowIndex, new Point(0, -92));
-                this.panelSpiel.Controls.Add(newTile.GetView());
-            }
-        }
-
-        private bool NewTileRowRequired()
-        {
-            // First find the y value of the tile row on top
-            int currentMinY = 0;
-            foreach(Control tile in this.panelSpiel.Controls)
-            {
-                if (currentMinY > tile.Location.Y)
-                {
-                    currentMinY = tile.Location.Y;
-                }
-            }
-
-            // A new tile is required if the current minimal Y is >= 0
-            return currentMinY >= 0;
-        }
-
 
         public void StartGameTimer()
         {
@@ -153,6 +88,50 @@ namespace Nemo
         public void SetOnTickAction(EventHandler Handler)
         {
             this.timerGame.Tick += Handler;
+        }
+        public void ClearBoard()
+        {
+            this.panelSpiel.Controls.Clear();
+        }
+
+        public void RenderTile(int value, int x, int y, Color Background)
+        {
+
+            Control[] tiles = this.panelSpiel.Controls.Find($"tile{value}", false);
+            if (tiles.Length != 0) {
+                tiles[0].Location = new Point(x, y);
+            }
+            else
+            {
+                Point location = new Point(x, y);
+
+                Panel newTilePanel = new Panel();
+                Label newTileLabel = new Label();
+                newTilePanel.SuspendLayout();
+
+                newTilePanel.BackColor = SystemColors.ControlLight;
+
+                newTilePanel.Location = location;
+                newTilePanel.Name = $"tile{value}";
+                newTilePanel.Padding = new Padding(5);
+                newTilePanel.Size = new Size(131, 92);
+                newTilePanel.TabIndex = 0;
+
+
+                newTileLabel.Text = value.ToString();
+                newTileLabel.BackColor = Background;
+                newTileLabel.Dock = DockStyle.Fill;
+                newTileLabel.Location = new Point(5, 5);
+                newTileLabel.Name = $"label${value}";
+                newTileLabel.Size = new Size(121, 82);
+                newTileLabel.TabIndex = 0;
+                newTileLabel.TextAlign = ContentAlignment.MiddleCenter;
+
+                newTilePanel.Controls.Add(newTileLabel);
+                newTilePanel.ResumeLayout(false);
+
+                this.panelSpiel.Controls.Add(newTilePanel);
+            }
         }
     }
 }
