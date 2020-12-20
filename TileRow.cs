@@ -19,7 +19,7 @@ namespace Nemo
         {
             this.RowIndex = rowIndex;
             this.RowLength = tileCount;
-            this.Y = -92;
+            this.Y = -tileHeight;
 
             this.TileHeight = tileHeight;
             this.TileWidth = tileWidth;
