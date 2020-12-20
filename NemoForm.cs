@@ -6,16 +6,114 @@ namespace Nemo
 {
     public partial class NemoForm : Form
     {
+        private EventHandler ClickOnWrongTileHandler;
+        private Action<int> ClickOnRedTileCallback;
         public NemoForm()
         {
             InitializeComponent();
         }
 
+
+        public void RenderTile(int value, int x, int y,int width, int height, Color background)
+        {
+
+            Control[] tiles = this.panelSpiel.Controls.Find($"tile{value}", false);
+            if (tiles.Length != 0) {
+                tiles[0].Location = new Point(x, y);
+            }
+            else
+            {
+                Point location = new Point(x, y);
+
+                Panel newTilePanel = this.CreateNewPanel(value, width, height, location);
+                Label newTileLabel = this.CreateNewLabel(value,width-10, height-10, background);
+                newTilePanel.SuspendLayout();
+
+
+                newTilePanel.Controls.Add(newTileLabel);
+                newTilePanel.ResumeLayout(false);
+
+                this.panelSpiel.Controls.Add(newTilePanel);
+
+                this.RegisterOnClickEventOnLabel(newTileLabel, value);
+                
+            }
+        }
+
+        private Label CreateNewLabel(int value, int width, int height, Color background)
+        {
+            Label newLabel = new Label();
+            newLabel.Text = value.ToString();
+            newLabel.BackColor = background;
+            newLabel.Dock = DockStyle.Fill;
+            newLabel.Location = new Point(5, 5);
+            newLabel.Name = $"label${value}";
+            newLabel.Size = new Size(width - 10, height - 10);
+            newLabel.TabIndex = 0;
+            newLabel.TextAlign = ContentAlignment.MiddleCenter;
+
+            return newLabel;
+        }
+
+        private Panel CreateNewPanel(int value, int width, int height, Point location)
+        {
+            Panel newPanel = new Panel();
+            newPanel.BackColor = SystemColors.ControlLight;
+
+            newPanel.Location = location;
+            newPanel.Name = $"tile{value}";
+            newPanel.Padding = new Padding(5);
+            newPanel.Size = new Size(width, height);
+            newPanel.TabIndex = 0;
+
+            return newPanel;
+        }
+
+        private void RegisterOnClickEventOnLabel(Label label, int value)
+        {
+            if (label.BackColor== Color.Red)
+            {
+                label.Click += new EventHandler((s, e) => {
+                    label.BackColor = Color.Pink;
+                    this.ClickOnRedTileCallback.Invoke(value);
+                });
+            } else
+            {
+                label.Click += this.ClickOnWrongTileHandler; 
+            }
+        }
+
+        public void AddClickOnWrongTileHandler(EventHandler handler)
+        {
+            this.ClickOnWrongTileHandler = handler;
+        }
+        public void AddClickOnRedTileCallback(Action<int> callback)
+        {
+            this.ClickOnRedTileCallback = callback;
+        }
+        public void AddStartButtonClickHandler(EventHandler handler)
+        {
+            this.btnStart.Click += handler;
+        }
+        public void AddStopButtonClickHandler(EventHandler handler)
+        {
+            this.btnStop.Click += handler;
+        }
+
+        public void AddRestartButtonClickHandler(EventHandler handler)
+        {
+            this.btnRestart.Click += handler;
+        }
+
+        public void SetOnTickAction(EventHandler handler)
+        {
+            this.timerGame.Tick += handler;
+        }
         public int GetBoardHeight()
         {
             return this.panelSpiel.Height;
         }
-        
+
         public int GetBoardWidth()
         {
             return this.panelSpiel.Width;
@@ -44,9 +142,9 @@ namespace Nemo
             return this.btnRestart;
         }
 
-        public void SetInfoText(String Text)
+        public void SetInfoText(String text)
         {
-            this.txtInfo.Text = Text;
+            this.txtInfo.Text = text;
         }
 
         public void DisableStartButton()
@@ -75,67 +173,10 @@ namespace Nemo
         {
             this.btnRestart.Enabled = true;
         }
-        public void AddStartButtonClickHandler(EventHandler Handler)
-        {
-            this.btnStart.Click += Handler;
-        }
-        public void AddStopButtonClickHandler(EventHandler Handler)
-        {
-            this.btnStop.Click += Handler;
-        }
 
-        public void AddRestartButtonClickHandler(EventHandler Handler)
-        {
-            this.btnRestart.Click += Handler;
-        }
-
-        public void SetOnTickAction(EventHandler Handler)
-        {
-            this.timerGame.Tick += Handler;
-        }
         public void ClearBoard()
         {
             this.panelSpiel.Controls.Clear();
-        }
-
-        public void RenderTile(int value, int x, int y,int width, int height, Color Background)
-        {
-
-            Control[] tiles = this.panelSpiel.Controls.Find($"tile{value}", false);
-            if (tiles.Length != 0) {
-                tiles[0].Location = new Point(x, y);
-            }
-            else
-            {
-                Point location = new Point(x, y);
-
-                Panel newTilePanel = new Panel();
-                Label newTileLabel = new Label();
-                newTilePanel.SuspendLayout();
-
-                newTilePanel.BackColor = SystemColors.ControlLight;
-
-                newTilePanel.Location = location;
-                newTilePanel.Name = $"tile{value}";
-                newTilePanel.Padding = new Padding(5);
-                newTilePanel.Size = new Size(width, height);
-                newTilePanel.TabIndex = 0;
-
-
-                newTileLabel.Text = value.ToString();
-                newTileLabel.BackColor = Background;
-                newTileLabel.Dock = DockStyle.Fill;
-                newTileLabel.Location = new Point(5, 5);
-                newTileLabel.Name = $"label${value}";
-                newTileLabel.Size = new Size(width - 10, height -10);
-                newTileLabel.TabIndex = 0;
-                newTileLabel.TextAlign = ContentAlignment.MiddleCenter;
-
-                newTilePanel.Controls.Add(newTileLabel);
-                newTilePanel.ResumeLayout(false);
-
-                this.panelSpiel.Controls.Add(newTilePanel);
-            }
         }
     }
 }

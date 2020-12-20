@@ -6,7 +6,7 @@ namespace Nemo
     class NemoModel
     {
         private int gameCount = 0;
-        private int points = 0;
+        private int Points = 0;
         private int speed = 5;
         private int speedIncrement = 5;
         private int rowIndex = 0;
@@ -66,24 +66,34 @@ namespace Nemo
         public String GetInfoErrorClick() 
         { 
             return $"Du hast das falsche Feld geklickt - Die Spielrunde ist vorüber\n" +
-                $"Du hast {this.points} Punkte und eine Geschwindigkeit von {this.speed} erreicht"; 
+                $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.speed} erreicht"; 
         }
         
         public String GetInfoErrorMissed() 
         {
             return $"Du hast in der untersten Reihe nicht geklickt - Die Spielrunde ist vorüber\n" +
-                  $"Du hast {this.points} Punkte und eine Geschwindigkeit von {this.speed} erreicht";
+                  $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.speed} erreicht";
         } 
 
         public String GetInfoErrorStopped() 
         {
             return $"Du hast das Spiel gestoppt - Die Spielrunde ist vorüber\n" +
-                  $"Du hast {this.points} Punkte und eine Geschwindigkeit von {this.speed} erreicht";
+                  $"Du hast {this.Points} Punkte und eine Geschwindigkeit von {this.speed} erreicht";
         }     
         
         public void IncreaseGameCount()
         {
             this.gameCount++;
+        }
+
+        public void IncreaseSpeed()
+        {
+            this.speed += this.speedIncrement;
+        }
+
+        public void AddPoints(int points)
+        {
+            this.Points += points;
         }
     }
 }

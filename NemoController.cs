@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Nemo
 {
@@ -22,6 +23,8 @@ namespace Nemo
             this.View.AddStartButtonClickHandler(new EventHandler(this.ClickOnStart));
             this.View.AddStopButtonClickHandler(new EventHandler(this.ClickOnStop));
             this.View.AddRestartButtonClickHandler(new EventHandler(this.ClickOnRestart));
+            this.View.AddClickOnWrongTileHandler(new EventHandler(this.ClickOnWrongTile));
+            this.View.AddClickOnRedTileCallback(this.ClickOnRedTile);
 
             this.View.SetOnTickAction(new EventHandler(this.HandleTick));
         }
@@ -50,6 +53,20 @@ namespace Nemo
             this.View.SetInfoText(this.Model.GetInfoIdle());
             this.View.ClearBoard();
             // TODO reset game
+        }
+
+        private void ClickOnWrongTile(object sender, EventArgs e)
+        {
+            this.View.StopGameTimer();
+            this.View.DisableStopButton();
+            this.View.EnableRestartButton();
+            this.View.SetInfoText(this.Model.GetInfoErrorClick());
+        }
+
+        private void ClickOnRedTile(int value)
+        {
+            this.Model.AddPoints(value);
+            this.Model.IncreaseSpeed();
         }
 
         private void UpdateGame()
